@@ -1,17 +1,18 @@
 #include <SDL.h>
-#include "Sprite.h"
-#include "Audio.h"
-#include "Tile.h"
+#include "Core/Sprite.h"
+#include "Core/Audio.h"
+#include "Core/Tile.h"
 #undef main
 
 int main()
 {
-	//Yeet
 	SDL_Window* mainWindow;
 	SDL_Renderer* mainRenderer;
+	SDL_Event e;
+	int poll = 0;
 	bool isRunning = true;
 
-	Sprite* testSprite = new Sprite(64,64,215,265,0,0,1);
+	Sprite* testSprite = new Sprite(64,64,215,265,(215/2),(265/2),1);
 	Sprite* tileSprite = new Sprite(0, 0, 224, 64, 0, 0, 1);
 	Tileset* tset = new Tileset(tileSprite, 32, 32);
 
@@ -60,7 +61,7 @@ int main()
 	int grid[10][10] = {
 		1,1,1,1,0,0,0,0,0,0,
 		1,1,1,1,0,0,0,0,0,0,
-		0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,1,1,1,0,
 		0,0,0,0,0,0,0,0,0,0,
 		0,0,0,0,1,0,0,0,0,0,
 		0,0,0,1,1,1,0,0,0,0,
@@ -78,6 +79,17 @@ int main()
 	//Game Loop
 	while (isRunning)
 	{
+		poll = SDL_PollEvent(&e);
+
+		while (SDL_PollEvent(&e) != 0)
+		{
+			//User requests quit
+			if (e.type == SDL_QUIT)
+			{
+				isRunning = false;
+			}
+		}
+		testSprite->image_angle+=0.01;
 		SDL_RenderClear(mainRenderer);
 		SDL_SetRenderDrawColor(mainRenderer, 255, 0, 0, 1);
 		testSprite->Render(mainRenderer);

@@ -1,5 +1,5 @@
 #pragma once
-#include "Core/Sprite.h"
+#include "Sprite.h"
 
 struct Tile : public Sprite
 {
