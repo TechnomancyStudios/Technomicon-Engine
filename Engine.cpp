@@ -6,6 +6,7 @@
 
 int main()
 {
+	//Yeet
 	SDL_Window* mainWindow;
 	SDL_Renderer* mainRenderer;
 	bool isRunning = true;
