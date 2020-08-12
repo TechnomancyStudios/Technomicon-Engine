@@ -1,7 +1,7 @@
 #include <SDL.h>
-#include "Core/Sprite.h"
-#include "Core/Audio.h"
-#include "Core/Tile.h"
+#include "Sprite.h"
+#include "Audio.h"
+#include "Tile.h"
 #undef main
 
 int main()

@@ -1,4 +1,4 @@
-#include "Core/Sprite.h"
+#include "Sprite.h"
 
 Sprite::Sprite()
 {
