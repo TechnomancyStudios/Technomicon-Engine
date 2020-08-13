@@ -43,9 +43,9 @@ void Tileset::AddToGrid(int g_x, int g_y, int x_in, int y_in)
 
 void Tileset::AddFromGrid(int grid[10][10])
 {
-	for (int y = 0; y <= 9; y++)
+	for (int y = 0; y < 10; y++)
 	{
-		for (int x = 0; x < 9; x++)
+		for (int x = 0; x < 10; x++)
 		{
 			if (grid[y][x] == 0)
 			{
@@ -104,42 +104,48 @@ void Tileset::UpdateTiles()
 				else if (!t_top && t_bottom && !t_left && t_right)
 					tile_grid[y][x]->x_index = TILE_TOP_LEFT;
 				else if (!t_top && t_bottom && t_left && !t_right)
-				{
-					tile_grid[y][x]->x_index = TILE_TOP_RIGHT - 7;
-					tile_grid[y][x]->y_index = 1;
-				}
+					tile_grid[y][x]->x_index = TILE_TOP_RIGHT;
 				else if (t_top && !t_bottom && t_left && !t_right)
 				{
-					tile_grid[y][x]->x_index = TILE_BOTTOM_RIGHT - 7;
+					tile_grid[y][x]->x_index = TILE_BOTTOM_RIGHT - 8;
 					tile_grid[y][x]->y_index = 1;
 				}
 				else if (t_top && t_bottom && !t_left && t_right)
 				{
-					tile_grid[y][x]->x_index = TILE_LEFT - 7;
+					tile_grid[y][x]->x_index = TILE_LEFT - 8;
 					tile_grid[y][x]->y_index = 1;
 				}
 				else if (t_top && t_bottom && t_left && !t_right)
 				{
-					tile_grid[y][x]->x_index = TILE_RIGHT - 7;
+					tile_grid[y][x]->x_index = TILE_RIGHT - 8;
 					tile_grid[y][x]->y_index = 1;
 				}
 				else if (!t_top && t_bottom && t_left && t_right)
 				{
-					tile_grid[y][x]->x_index = TILE_TOP - 7;
+					tile_grid[y][x]->x_index = TILE_TOP - 8;
 					tile_grid[y][x]->y_index = 1;
 				}
 				else if (t_top && !t_bottom && t_left && t_right)
 				{
-					tile_grid[y][x]->x_index = TILE_BOTTOM - 7;
+					tile_grid[y][x]->x_index = TILE_BOTTOM - 8;
 					tile_grid[y][x]->y_index = 1;
 				}
 				else if (t_top && t_bottom && t_left && t_right)
 				{
-					tile_grid[y][x]->x_index = TILE_SURROUND - 7;
+					tile_grid[y][x]->x_index = TILE_SURROUND - 8;
+					tile_grid[y][x]->y_index = 1;
+				}
+				else if (!t_top && !t_bottom && t_left && t_right)
+				{
+					tile_grid[y][x]->x_index = TILE_TOP_BOTTOM - 8;
+					tile_grid[y][x]->y_index = 1;
+				}
+				else if (t_top && t_bottom && !t_left && !t_right)
+				{
+					tile_grid[y][x]->x_index = TILE_LEFT_RIGHT - 8;
 					tile_grid[y][x]->y_index = 1;
 				}
 			}
-			
 		}
 	}
 }

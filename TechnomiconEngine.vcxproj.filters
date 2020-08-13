@@ -4,36 +4,33 @@
     <Filter Include="Src">
       <UniqueIdentifier>{f82a12cd-3df2-4012-b0f8-cb90bbb69c8a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Src\Core">
-      <UniqueIdentifier>{5287f69b-3793-4da3-b8fc-875209c62254}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
       <Filter>Src</Filter>
     </ClCompile>
     <ClCompile Include="Audio.cpp">
-      <Filter>Src\Core</Filter>
+      <Filter>Src</Filter>
     </ClCompile>
     <ClCompile Include="Sprite.cpp">
-      <Filter>Src\Core</Filter>
+      <Filter>Src</Filter>
     </ClCompile>
     <ClCompile Include="Tile.cpp">
-      <Filter>Src\Core</Filter>
+      <Filter>Src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Audio.h">
-      <Filter>Src\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Sprite.h">
-      <Filter>Src\Core</Filter>
-    </ClInclude>
     <ClInclude Include="Tile.h">
-      <Filter>Src\Core</Filter>
+      <Filter>Src</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio.h">
+      <Filter>Src</Filter>
     </ClInclude>
     <ClInclude Include="Collision2D.h">
-      <Filter>Src\Core</Filter>
+      <Filter>Src</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Src</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -6,7 +6,7 @@ struct Tile : public Sprite
 	Tile();
 	Tile(int t_x, int t_y, int t_w, int t_h, Sprite* t_spr, int x_in, int y_in);
 
-	const int max_x_index = 7;
+	const int max_x_index = 8;
 	const int max_y_index = 2;
 
 	Sprite* tile_sprite;
@@ -20,6 +20,9 @@ struct Tile : public Sprite
 class Tileset
 {
 public:
+	const int max_x_index = 8;
+	const int max_y_index = 2;
+
 	Tileset(Sprite* t_sprite, int t_w, int t_h);
 
 	enum TileState
@@ -37,7 +40,9 @@ public:
 		TILE_TOP = 10,
 		TILE_RIGHT = 11,
 		TILE_BOTTOM = 12,
-		TILE_SURROUND = 13
+		TILE_SURROUND = 13,
+		TILE_TOP_BOTTOM = 14,
+		TILE_LEFT_RIGHT = 15
 	};
 
 	Sprite* tile_sprite;
