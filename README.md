@@ -10,6 +10,7 @@ Currently we are using SDL 2.0 with SDL_Img and SDL_Mixer as dependencies, so if
   - Basic Sprite Handling
   - Basic Audio Playback
   - Really Basic Autotiling
+  - Chip-8 Emulator
 
 ## Future Features!
   - Level Editor
