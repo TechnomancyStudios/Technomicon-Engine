@@ -136,13 +136,19 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Audio.cpp" />
+    <ClCompile Include="Chip8.cpp" />
+    <ClCompile Include="ECS.cpp" />
     <ClCompile Include="Engine.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="Tile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Audio.h" />
+    <ClInclude Include="Chip8.h" />
     <ClInclude Include="Collision2D.h" />
+    <ClInclude Include="ECS.h" />
+    <ClInclude Include="Engine.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Tile.h" />
   </ItemGroup>

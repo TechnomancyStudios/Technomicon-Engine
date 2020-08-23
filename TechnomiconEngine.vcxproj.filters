@@ -4,6 +4,12 @@
     <Filter Include="Src">
       <UniqueIdentifier>{f82a12cd-3df2-4012-b0f8-cb90bbb69c8a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\ECS">
+      <UniqueIdentifier>{115a3b0a-ccd6-4f88-a9d4-9b7f06d00bc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Chip8">
+      <UniqueIdentifier>{27e73b05-a268-4bdc-82cf-27e9bff2fa93}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -18,6 +24,15 @@
     <ClCompile Include="Tile.cpp">
       <Filter>Src</Filter>
     </ClCompile>
+    <ClCompile Include="ECS.cpp">
+      <Filter>Src\ECS</Filter>
+    </ClCompile>
+    <ClCompile Include="Chip8.cpp">
+      <Filter>Src\Chip8</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -30,6 +45,15 @@
       <Filter>Src</Filter>
     </ClInclude>
     <ClInclude Include="Sprite.h">
+      <Filter>Src</Filter>
+    </ClInclude>
+    <ClInclude Include="ECS.h">
+      <Filter>Src\ECS</Filter>
+    </ClInclude>
+    <ClInclude Include="Chip8.h">
+      <Filter>Src\Chip8</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine.h">
       <Filter>Src</Filter>
     </ClInclude>
   </ItemGroup>
