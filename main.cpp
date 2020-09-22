@@ -3,9 +3,9 @@
 
 int main()
 {
-	Engine engine("YEET", 640, 360);
+	Engine::Init("YEET", 1280, 720);
 
-	engine.Update();
+	Engine::Update();
 
 	return 0;
 }

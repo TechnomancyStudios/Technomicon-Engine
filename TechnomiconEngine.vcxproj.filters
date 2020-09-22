@@ -10,6 +10,12 @@
     <Filter Include="Src\Chip8">
       <UniqueIdentifier>{27e73b05-a268-4bdc-82cf-27e9bff2fa93}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Src\Objects">
+      <UniqueIdentifier>{d1241f15-17d6-4774-b3e5-c701219038b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\Shaders">
+      <UniqueIdentifier>{cf3a54e6-769d-4359-8a6e-a8e24da9e10b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine.cpp">
@@ -33,6 +39,15 @@
     <ClCompile Include="main.cpp">
       <Filter>Src</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Src\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Src\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Src\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">
@@ -55,6 +70,15 @@
     </ClInclude>
     <ClInclude Include="Engine.h">
       <Filter>Src</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Src\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Src\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Src\Objects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
