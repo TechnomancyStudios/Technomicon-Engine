@@ -7,8 +7,6 @@ Tile::Tile()
 
 Tile::Tile(int t_x, int t_y, int t_w, int t_h, Sprite* t_spr, int x_in, int y_in)
 {
-	sprite_x = t_x;
-	sprite_y = t_y;
 	sprite_w = t_w;
 	sprite_h = t_h;
 	tile_sprite = t_spr;
@@ -20,11 +18,11 @@ void Tile::Render(SDL_Renderer* render)
 {
 	if (tile_sprite != NULL)
 	{
-		SDL_Rect spriteRect = { sprite_x, sprite_y, sprite_w, sprite_h };
-		SDL_Rect clipRect = { sprite_w * x_index, sprite_h * y_index, sprite_w, sprite_h };
+		//SDL_Rect spriteRect = { sprite_x, sprite_y, sprite_w, sprite_h };
+		//SDL_Rect clipRect = { sprite_w * x_index, sprite_h * y_index, sprite_w, sprite_h };
 
 		SDL_RenderSetScale(render,1.0f,1.0f);
-		SDL_RenderCopyEx(render, tile_sprite->spriteTexture, &clipRect, &spriteRect, image_angle, { 0 }, SDL_FLIP_NONE);
+		//SDL_RenderCopyEx(render, tile_sprite->spriteTexture, &clipRect, &spriteRect, image_angle, { 0 }, SDL_FLIP_NONE);
 	}
 }
 

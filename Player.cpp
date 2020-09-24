@@ -1,6 +1,6 @@
 #include "Player.h"
 
-Sprite test(0, 0, 215, 265, 0, 0, 0);
+//Sprite test(0, 0, 215, 265, 0, 0, 0);
 
 Player::Player()
 {
@@ -23,11 +23,10 @@ void Player::Init(int x, int y)
 
 void Player::Update()
 {
-	sprite->sprite_x = x;
-	sprite->sprite_y = y;
+
 }
 
 void Player::Render(SDL_Renderer* renderer)
 {
-	sprite->Render(renderer);
+	//sprite->Render(renderer);
 }

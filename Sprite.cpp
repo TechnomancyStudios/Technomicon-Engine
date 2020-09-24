@@ -2,8 +2,6 @@
 
 Sprite::Sprite()
 {
-	sprite_x = 0;
-	sprite_y = 0;
 	sprite_w = 64;
 	sprite_h = 64;
 	image_xscale = 1.0;
@@ -12,47 +10,65 @@ Sprite::Sprite()
 	sprite_speed = 0;
 	origin_x = 0;
 	origin_y = 0;
-	origin = { origin_x,origin_y };
-	rect = new SDL_Rect({ 0,0,64,64 });
+	Setup();
 }
 
-Sprite::Sprite(std::string tpath, int w, int h)
+Sprite::Sprite(std::string tpath)
 {
-	sprite_x = 0;
-	sprite_y = 0;
-	sprite_w = w;
-	sprite_h = h;
+	sprite_w = 0;
+	sprite_h = 0;
 	image_xscale = 1.0;
 	image_yscale = 1.0;
 	image_angle = 0.0;
 	sprite_speed = 0;
 	origin_x = 0;
 	origin_y = 0;
-	origin = { origin_x,origin_y };
-	rect = new SDL_Rect({ 0,0,w,h });
-
-	LoadSprite(tpath,nullptr);
+	LoadSprite(tpath);
+	Setup();
 }
 
-Sprite::Sprite(int s_x, int s_y, int s_w, int s_h, int o_x, int o_y, int speed)
-{
-	sprite_x = s_x;
-	sprite_y = s_y;
-	sprite_w = s_w;
-	sprite_h = s_h;
-	image_xscale = 1.0;
-	image_yscale = 1.0;
-	image_angle = 0.0;
-	sprite_speed = speed;
-	origin_x = o_x;
-	origin_y = o_y;
-	origin = { origin_x,origin_y };
-	rect = new SDL_Rect({ s_x,s_y,s_w,s_h });
-}
 
 Sprite::~Sprite()
 {
-	SDL_DestroyTexture(spriteTexture);
+	SDL_FreeSurface(spriteSurface);
+}
+
+void Sprite::Setup()
+{
+	float vertices[] = {
+			-0.5f,-0.5f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f, // Vertex 1 (X, Y)
+			 0.5f,-0.5f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, // Vertex 2 (X, Y)
+			 0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f,  // Vertex 3 (X, Y)
+			-0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f
+	};
+
+	unsigned int indices[] = {
+		0,1,2,
+		2,3,0
+	};
+
+	glGenVertexArrays(1, &vao);
+	glGenBuffers(1, &vbo);
+	glGenBuffers(1, &ebo);
+
+	glBindVertexArray(vao);
+
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+	glEnableVertexAttribArray(1);
+
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+	glEnableVertexAttribArray(2);
+
+	//glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindVertexArray(0);
 }
 
 void Sprite::Generate_Max_Index()
@@ -70,121 +86,83 @@ void Sprite::Generate_Max_Index()
 	}
 }
 
-bool Sprite::LoadSprite(std::string tpath, SDL_Renderer* render)
+bool Sprite::LoadSprite(std::string tpath)
 {
 	//Load Image into Surface
-	SDL_Surface* loadedSurface = IMG_Load(tpath.c_str());
-	if (loadedSurface == NULL)
+	spriteSurface = IMG_Load(tpath.c_str());
+	if (spriteSurface == NULL)
 	{
 		printf("UNABLE TO LOAD IMAGE!\n");
 		return false;
 	}
 	else
 	{
-		//Create Texture from Surface
-		spriteTexture = SDL_CreateTextureFromSurface(render, loadedSurface);
-		if (spriteTexture == NULL)
-		{
-			printf("THIS TEXTURE COULDN'T BE CREATED YO!\n");
-		}
-		//Set Image Width and Height
-		image_w = loadedSurface->w;
-		image_h = loadedSurface->h;
-		Generate_Max_Index();
-		//Gets rid of loadedSurface to save memory
-		SDL_FreeSurface(loadedSurface);
+		sprite_w = spriteSurface->w;
+		sprite_h = spriteSurface->h;
+		glGenTextures(1, &spriteTexture);
+		glBindTexture(GL_TEXTURE_2D, spriteTexture);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, spriteSurface->w, spriteSurface->h, 0, GL_RGBA, GL_UNSIGNED_BYTE, spriteSurface->pixels);
+		glGenerateMipmap(GL_TEXTURE_2D);
+		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 	return true;
 }
 
-void Sprite::Flip_Sprite(SDL_RendererFlip sflip)
+void Sprite::Render(Shader shader, glm::mat4 m_view, glm::mat4 m_projection)
 {
-	flip = sflip;
+	glm::mat4 final_trans = glm::mat4(1.0f);
+	m_world = glm::mat4(1.0f);
+	m_world = glm::translate(m_world, glm::vec3(-(position.x+origin_x), -(position.y+origin_y), 1.0f));
+	m_world = glm::rotate(m_world, glm::radians(image_angle), glm::vec3(0.0f, 0.0f, 1.0f));
+	m_world = glm::scale(m_world, glm::vec3(-sprite_w*image_xscale, sprite_h* image_yscale, 1.0f));
+
+	final_trans = m_projection * m_view * m_world;
+
+	glUseProgram(shader.shaderID);
+	unsigned int transformLoc = glGetUniformLocation(shader.shaderID, "transform");
+	unsigned int timeUniform = glGetUniformLocation(shader.shaderID, "time");
+	glUniform1f(timeUniform, (float)SDL_GetTicks());
+	glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(final_trans));
+	glBindTexture(GL_TEXTURE_2D, spriteTexture);
+	glBindVertexArray(vao);
+	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+	glBindTexture(GL_TEXTURE_2D, 0);
+	glBindVertexArray(0);
 }
-
-void Sprite::Set_Origin(int x, int y)
-{
-	origin.x = x;
-	origin.y = y;
-}
-
-void Sprite::Render(SDL_Renderer* render)
-{
-	SDL_Rect spriteRect;
-	SDL_Rect clipRect;
-
-	if (sprite_speed > 0)
-	{
-		spriteRect = { sprite_x,sprite_y,(int)(sprite_w * image_xscale),(int)(sprite_h * image_yscale) };
-		clipRect = { sprite_w * (image_index++ / sprite_speed),0,sprite_w,sprite_h };
-
-		if ((image_index / sprite_speed > image_max_index))
-		{
-			image_index = 0;
-		}
-		Set_Origin(origin_x * image_xscale, origin_y * image_yscale);
-		SDL_RenderCopyEx(render, spriteTexture, &clipRect, &spriteRect, image_angle, &origin, flip);
-	}
-	else
-	{
-		spriteRect = { sprite_x,sprite_y,(int)(sprite_w * image_xscale),(int)(sprite_h * image_yscale) };
-		clipRect = { sprite_w, 0, sprite_w, sprite_h };
-
-		Set_Origin(origin_x * image_xscale, origin_y * image_yscale);
-		SDL_RenderCopyEx(render, spriteTexture, NULL, &spriteRect, image_angle, &origin, flip);
-	}
-}
-
-void Sprite::RenderRect(SDL_Renderer* render)
-{
-	SDL_SetRenderDrawColor(render, 255, 255, 255, 255);
-	SDL_RenderFillRect(render, rect);
-	SDL_SetRenderDrawColor(render, 0, 0, 0, 0);
-}
-
 
 Background::Background()
 {
 	sprite = new Sprite();
 }
 
-Background::Background(std::string tpath, SDL_Renderer* renderer)
+Background::Background(std::string tpath)
 {
 	sprite = new Sprite();
-	LoadSprite(sprite, tpath, renderer);
+	//LoadSprite(sprite);
 }
 
 void Background::Render(SDL_Renderer* render)
 {
-	if (this->sprite != nullptr)
-	{
-		sprite->sprite_x = x_offset + x_speed;
-		sprite->sprite_y = y_offset + y_speed;
-		sprite->Render(render);
-	}
+	
 }
 
-void LoadSprite(Sprite* sprite, std::string tpath, SDL_Renderer* render)
+void LoadSprite(Sprite* sprite, std::string tpath)
 {
 	//Load Image into Surface
-	SDL_Surface* loadedSurface = IMG_Load(tpath.c_str());
-	if (loadedSurface == NULL)
+	sprite->spriteSurface = IMG_Load(tpath.c_str());
+	if (sprite->spriteSurface == NULL)
 	{
 		printf("UNABLE TO LOAD IMAGE!\n");
 	}
 	else
 	{
-		//Create Texture from Surface
-		sprite->spriteTexture = SDL_CreateTextureFromSurface(render, loadedSurface);
-		if (sprite->spriteTexture == NULL)
-		{
-			printf("THIS TEXTURE COULDN'T BE CREATED YO!\n");
-		}
-		sprite->sprite_w = loadedSurface->w;
-		sprite->sprite_h = loadedSurface->h;
-		sprite->image_w = loadedSurface->w;
-		sprite->image_h = loadedSurface->h;
-		//Gets rid of loadedSurface to save memory
-		SDL_FreeSurface(loadedSurface);
+		//Set Image Width and Height
+		sprite->image_w = sprite->spriteSurface->w;
+		sprite->image_h = sprite->spriteSurface->h;
+		//Generate_Max_Index();
 	}
 }

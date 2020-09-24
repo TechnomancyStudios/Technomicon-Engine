@@ -80,5 +80,8 @@
     <ClInclude Include="Scene.h">
       <Filter>Src\Objects</Filter>
     </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Src</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

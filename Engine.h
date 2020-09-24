@@ -17,6 +17,7 @@
 #include "Player.h"
 #include "Scene.h"
 #include <string>
+#include "Shader.h"
 
 namespace Engine
 {
