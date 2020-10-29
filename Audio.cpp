@@ -3,6 +3,8 @@
 MusicPlayer::MusicPlayer()
 {
 	currentTrack = NULL;
+	Mix_AllocateChannels(MAX_CHANNELS);
+
 }
 
 void MusicPlayer::PlayTrack(const char* trackName, int loops)
@@ -21,4 +23,9 @@ void MusicPlayer::AddTrackToMap(const char* musicPath, const char* trackName)
 	}
 	else
 		std::cout << "Track Failed to be Added to Music Map!" << std::endl;
+}
+
+void MusicPlayer::FadeTrackIn(const char* trackName, int loops, int ms)
+{
+	Mix_FadeInMusic(musicMap[trackName], loops, ms);
 }

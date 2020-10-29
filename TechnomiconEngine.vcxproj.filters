@@ -39,14 +39,23 @@
     <ClCompile Include="main.cpp">
       <Filter>Src</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Src\Objects</Filter>
-    </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>Src\Objects</Filter>
     </ClCompile>
     <ClCompile Include="Scene.cpp">
       <Filter>Src\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Framebuffer.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="Shapes.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="Alarm.cpp">
+      <Filter>Src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -74,14 +83,40 @@
     <ClInclude Include="GameObject.h">
       <Filter>Src\Objects</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Src\Objects</Filter>
-    </ClInclude>
     <ClInclude Include="Scene.h">
       <Filter>Src\Objects</Filter>
     </ClInclude>
     <ClInclude Include="Shader.h">
       <Filter>Src</Filter>
     </ClInclude>
+    <ClInclude Include="Framebuffer.h">
+      <Filter>Src</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Src</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Src</Filter>
+    </ClInclude>
+    <ClInclude Include="Shapes.h">
+      <Filter>Src</Filter>
+    </ClInclude>
+    <ClInclude Include="Alarm.h">
+      <Filter>Src</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\default.fs">
+      <Filter>Src\Shaders</Filter>
+    </None>
+    <None Include="Shaders\default.vs">
+      <Filter>Src\Shaders</Filter>
+    </None>
+    <None Include="Shaders\default_pp.vs">
+      <Filter>Src\Shaders</Filter>
+    </None>
+    <None Include="Shaders\rainbow.fs">
+      <Filter>Src\Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

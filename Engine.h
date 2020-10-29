@@ -14,18 +14,24 @@
 #include <chrono>
 #include <random>
 #include "GameObject.h"
-#include "Player.h"
 #include "Scene.h"
 #include <string>
 #include "Shader.h"
+#include "Framebuffer.h"
+#include "Input.h"
+#include "Camera.h"
+#include "Shapes.h"
+#include "Alarm.h"
 
 namespace Engine
 {
 	extern SDL_Window* mainWindow;
 	extern SDL_Renderer* mainRenderer;
 	extern SDL_Event e;
-
+	extern KeyboardHandler keyboard;
 	extern Scene* mainScene;
+
+	extern std::default_random_engine gen;
 
 	extern int poll;
 	extern bool isRunning;
@@ -33,11 +39,11 @@ namespace Engine
 	extern SDL_GLContext gl_context;
 
 	int Init(const char* title, int windowWidth, int windowHeight);
-	void LoadScene(Scene* scene);
-	void Update();
-	void Render();
 	void Quit();
-}
+};
+
+void LoadScene(Scene* scene);
+
 
 /*
 struct Engine

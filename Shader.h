@@ -9,7 +9,32 @@ struct Shader
 {
 	GLuint shaderID;
 	std::string name;
+
+	void Use()
+	{
+		glUseProgram(shaderID);
+	}
+
+	void SetUniform1i(const char* name, int value)
+	{
+		glUniform1i(glGetUniformLocation(shaderID, name), value);
+	}
+
+	void SetUniform1ui(const char* name, int value)
+	{
+		glUniform1ui(glGetUniformLocation(shaderID, name), value);
+	}
+
+	void SetFloat(const char* name, float value)
+	{
+		glUniform1f(glGetUniformLocation(shaderID, name), value);
+	}
+
 };
+
+
+
+
 
 static unsigned int CompileShader(unsigned int type, const std::string& source)
 {
