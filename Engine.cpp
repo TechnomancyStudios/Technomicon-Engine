@@ -10,10 +10,14 @@ namespace Engine
 	KeyboardHandler keyboard;
 	Scene* mainScene;
 
+	GameObjectManager* gameManager;
+
 	std::default_random_engine gen;
 
 	int poll;
 	bool isRunning;
+
+	int engineWidth, engineHeight;
 
 	SDL_GLContext gl_context;
 
@@ -21,6 +25,9 @@ namespace Engine
 	{
 		poll = 0;
 		isRunning = true;
+		engineWidth = windowWidth;
+		engineHeight = windowHeight;
+		gameManager = new GameObjectManager();
 
 		int failed = 0;
 		//Initialize SDL
@@ -55,6 +62,8 @@ namespace Engine
 		{
 			//Create the Main Window
 			mainWindow = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, windowWidth, windowHeight, SDL_WINDOW_OPENGL);
+
+
 			//Create Main Renderer
 			gl_context = SDL_GL_CreateContext(mainWindow);
 
@@ -82,7 +91,7 @@ namespace Engine
 		SDL_DestroyWindow(mainWindow);
 		//Destroy Renderer
 		SDL_DestroyRenderer(mainRenderer);
-		//Clean up and Close Program
+		//Clean up and Close Program----
 		
 		//SDL_GL_DeleteContext(gl_context);
 		SDL_GL_DeleteContext(gl_context);

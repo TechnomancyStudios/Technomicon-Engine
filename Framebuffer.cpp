@@ -1,5 +1,7 @@
 #include "Framebuffer.h"
 #include <SDL.h>
+#include "Engine.h"
+
 Framebuffer::Framebuffer()
 {
 	glGenFramebuffers(1, &frameBuffer);
@@ -11,7 +13,7 @@ Framebuffer::Framebuffer()
 	{
 		glBindTexture(GL_TEXTURE_2D, frameTexture[i]);;
 
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 1280, 720, 0, GL_RGBA, GL_FLOAT, NULL);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Engine::engineWidth, Engine::engineHeight, 0, GL_RGBA, GL_FLOAT, NULL);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);

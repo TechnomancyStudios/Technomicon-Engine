@@ -24,7 +24,7 @@ public:
 	~Scene() { delete gameObjectManager; };
 
 	void Update();
-	void Render(SDL_Renderer* render);
+	void Render();
 	void LoadBackground(Sprite* background, int index);
 
 private:

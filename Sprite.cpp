@@ -8,8 +8,6 @@ Sprite::Sprite()
 	image_yscale = 1.0;
 	image_angle = 0.0;
 	sprite_speed = 0;
-	origin_x = 0;
-	origin_y = 0;
 	Setup();
 }
 
@@ -21,8 +19,6 @@ Sprite::Sprite(std::string tpath)
 	image_yscale = 1.0;
 	image_angle = 0.0;
 	sprite_speed = 0;
-	origin_x = 0;
-	origin_y = 0;
 	LoadSprite(tpath);
 	Setup();
 }
@@ -30,16 +26,19 @@ Sprite::Sprite(std::string tpath)
 
 Sprite::~Sprite()
 {
-	SDL_FreeSurface(spriteSurface);
+	if (spriteSurface != NULL)
+	{
+		SDL_FreeSurface(spriteSurface);
+	}
 }
 
 void Sprite::Setup()
 {
 	float vertices[] = {
-			-0.5f,-0.5f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f, // Vertex 1 (X, Y)
-			 0.5f,-0.5f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, // Vertex 2 (X, Y)
-			 0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f,  // Vertex 3 (X, Y)
-			-0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f
+			 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f, // Vertex 1 (X, Y)
+			 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, // Vertex 2 (X, Y)
+			 1.0f, 1.0f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f,  // Vertex 3 (X, Y)
+			 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f
 	};
 
 	unsigned int indices[] = {
@@ -99,6 +98,7 @@ bool Sprite::LoadSprite(std::string tpath)
 	{
 		sprite_w = spriteSurface->w;
 		sprite_h = spriteSurface->h;
+
 		glGenTextures(1, &spriteTexture);
 		glBindTexture(GL_TEXTURE_2D, spriteTexture);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
@@ -116,9 +116,10 @@ void Sprite::Render(Shader shader, glm::mat4 m_view, glm::mat4 m_projection)
 {
 	glm::mat4 final_trans = glm::mat4(1.0f);
 	m_world = glm::mat4(1.0f);
-	m_world = glm::translate(m_world, glm::vec3(-(position.x+origin_x), -(position.y+origin_y), 1.0f));
+	float rad = glm::radians(image_angle);
+	m_world = glm::translate(m_world, glm::vec3(-(position.x - (glm::cos(rad) * origin.x + glm::sin(rad) * origin.y)), -(position.y + (glm::cos(rad) * origin.y - glm::sin(rad) * origin.x)), 1.0f));
 	m_world = glm::rotate(m_world, glm::radians(image_angle), glm::vec3(0.0f, 0.0f, 1.0f));
-	m_world = glm::scale(m_world, glm::vec3(-sprite_w*image_xscale, sprite_h* image_yscale, 1.0f));
+	m_world = glm::scale(m_world, glm::vec3(-sprite_w*image_xscale, sprite_h*image_yscale, 1.0f));
 
 	final_trans = m_projection * m_view * m_world;
 
@@ -145,24 +146,7 @@ Background::Background(std::string tpath)
 	//LoadSprite(sprite);
 }
 
-void Background::Render(SDL_Renderer* render)
+void Background::Render()
 {
 	
-}
-
-void LoadSprite(Sprite* sprite, std::string tpath)
-{
-	//Load Image into Surface
-	sprite->spriteSurface = IMG_Load(tpath.c_str());
-	if (sprite->spriteSurface == NULL)
-	{
-		printf("UNABLE TO LOAD IMAGE!\n");
-	}
-	else
-	{
-		//Set Image Width and Height
-		sprite->image_w = sprite->spriteSurface->w;
-		sprite->image_h = sprite->spriteSurface->h;
-		//Generate_Max_Index();
-	}
 }

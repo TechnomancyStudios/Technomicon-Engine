@@ -1,5 +1,6 @@
 #pragma once
-#include <SDL_mixer.h>
+#include <SDL2/SDL_mixer_ext.h>
+//#include <SDL_mixer.h>
 #include <iostream>
 #include <map>
 
@@ -22,7 +23,11 @@ public:
 	void FadeTrackOut();
 	void AddTrackToMap(const char* musicPath, const char* trackName);
 	void StopTrack();
-private:
+	void Update();
 	Mix_Music* currentTrack;
 	std::map<const char*, Mix_Music*> musicMap;
+	Mix_Fading fadeState = MIX_NO_FADING;
+	int fadeTimeMS = 0;
+	int maxMusicVol = 128;
+	float musicVol = 128.0f;
 };

@@ -57,6 +57,9 @@
     <ClCompile Include="Alarm.cpp">
       <Filter>Src</Filter>
     </ClCompile>
+    <ClCompile Include="Collision2D.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">

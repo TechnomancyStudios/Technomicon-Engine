@@ -31,11 +31,11 @@ public:
 	float image_angle = 0.0f;
 	int image_max_index = -1;
 	int image_w = 0, image_h = 0;
-	int origin_x = 0, origin_y = 0;
 	float image_xscale = 1.0f, image_yscale = 1.0f;
 	float sprite_w = 0.0f, sprite_h = 0.0f;
 
 	glm::vec2 position = glm::vec2(0.0f);
+	glm::vec2 origin = glm::vec2(0.0f);
 
 	int isAnimated = false;
 
@@ -61,7 +61,7 @@ struct Background
 	Background();
 	Background(std::string tpath);
 
-	void Render(SDL_Renderer* render);
+	void Render();
 };
 
-void LoadSprite(Sprite* sprite, std::string tpath, SDL_Renderer* render);
+void LoadSprite(Sprite* sprite, std::string tpath);

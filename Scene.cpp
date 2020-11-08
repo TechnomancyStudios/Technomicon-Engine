@@ -5,12 +5,12 @@ void Scene::Update()
 	gameObjectManager->Update();
 }
 
-void Scene::Render(SDL_Renderer* render)
+void Scene::Render()
 {
 	for (auto b : backgrounds)
-		b.Render(render);
+		b.Render();
 
-	gameObjectManager->Render(render);
+	gameObjectManager->Render();
 }
 
 void Scene::LoadBackground(Sprite* background, int index)

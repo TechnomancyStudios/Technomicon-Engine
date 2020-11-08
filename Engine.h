@@ -35,8 +35,11 @@ namespace Engine
 
 	extern int poll;
 	extern bool isRunning;
+	extern int engineWidth, engineHeight;
 
 	extern SDL_GLContext gl_context;
+
+	extern GameObjectManager* gameManager;
 
 	int Init(const char* title, int windowWidth, int windowHeight);
 	void Quit();

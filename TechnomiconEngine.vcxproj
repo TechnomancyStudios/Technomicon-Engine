@@ -74,8 +74,8 @@
     <LibraryPath>C:\VS\SDL2-2.0.9\lib\x86;C:\VS\SDL2_image-2.0.4\lib\x86;C:\VS\SDL2_mixer-2.0.4\lib\x86;C:\glew-2.2.0\lib\Release\Win32;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\VS\SDL2-2.0.9\include;C:\VS\SDL2_image-2.0.4\include;C:\VS\SDL2_mixer-2.0.4\include;C:\glew-2.2.0\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\VS\SDL2-2.0.9\lib\x64;C:\VS\SDL2_image-2.0.4\lib\x64;C:\VS\SDL2_mixer-2.0.4\lib\x64;C:\glew-2.2.0\lib\Release\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\VS\SDL2-2.0.9\include;C:\VS\SDL2_image-2.0.4\include;C:\VS\SDL2_mixer-2.0.4\include;C:\glew-2.2.0\include;C:\VS\SDL-Mixer-X\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\VS\SDL2-2.0.9\lib\x64;C:\VS\SDL2_image-2.0.4\lib\x64;C:\VS\SDL2_mixer-2.0.4\lib\x64;C:\glew-2.2.0\lib\Release\x64;C:\VS\SDL-Mixer-X\lib\Release;$(LibraryPath)</LibraryPath>
     <TargetExt>.lib</TargetExt>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -97,7 +97,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\VS\SDL2-2.0.9\include;C:\VS\SDL2_image-2.0.4\include;C:\VS\SDL2_mixer-2.0.4\include;C:\glew-2.2.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\VS\SDL2-2.0.9\include;C:\VS\SDL2_image-2.0.4\include;C:\VS\SDL2_mixer-2.0.4\include;C:\glew-2.2.0\include;C:\VS\SDL-Mixer-X\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -140,6 +140,7 @@
     <ClCompile Include="Audio.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Chip8.cpp" />
+    <ClCompile Include="Collision2D.cpp" />
     <ClCompile Include="ECS.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Framebuffer.cpp" />
