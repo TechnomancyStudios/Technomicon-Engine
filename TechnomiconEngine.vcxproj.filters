@@ -60,6 +60,7 @@
     <ClCompile Include="Collision2D.cpp">
       <Filter>Src</Filter>
     </ClCompile>
+    <ClCompile Include="Input.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Tile.h">

@@ -9,7 +9,9 @@ bool Alarm::Trigger(int frames, void (*function)())
 
 	if ( SDL_GetTicks() >= ( lastTime + (frames * 16.7) ) )
 	{
-		(*function)();
+		if(function != NULL)
+			(*function)();
+
 		lastTime = (int)SDL_GetTicks();
 		return true;
 	}

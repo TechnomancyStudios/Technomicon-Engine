@@ -2,6 +2,13 @@
 #include <SDL.h>
 #include <glm/glm.hpp>
 
+enum MouseButton
+{
+	LEFTMOUSEBUTTON = 1,
+	MIDDLEMOUSEBUTTON = 2,
+	RIGHTMOUSEBUTTON = 3
+};
+
 struct KeyboardHandler
 {
 	const Uint8* oldState = SDL_GetKeyboardState(NULL);
@@ -32,7 +39,8 @@ struct KeyboardHandler
 
 struct Mouse
 {
-	int x, y;
-	bool isMouseButtonPressed();
-	void Update();
+	glm::vec4 worldPosition;
+	glm::vec2 screenPosition;
+	Uint32 oldState = SDL_GetMouseState(NULL, NULL);
+	bool isMouseButtonPressed(MouseButton button);
 };

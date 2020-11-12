@@ -2,7 +2,19 @@
 
 Line::Line()
 {
+	float vertices[] = {
+		0.0f, 0.0f,
+		1.0f, 0.0f
+	};
 
+	glGenVertexArrays(1, &vao);
+	glGenBuffers(1, &vbo);
+	glBindVertexArray(vao);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), &vertices, GL_STATIC_DRAW);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0);
+	glBindVertexArray(0);
 }
 
 Line::Line(glm::vec2 xy1, glm::vec2 xy2)
@@ -57,7 +69,28 @@ void Line::Draw(Shader shader, glm::mat4 m_view, glm::mat4 m_projection)
 
 Rectangle::Rectangle()
 {
+	float vertices[] = {
+		0.0f, 0.0f,
+		0.0f, 1.0f,
 
+		0.0f, 1.0f,
+		1.0f, 1.0f,
+
+		1.0f, 1.0f,
+		1.0f, 0.0f,
+
+		1.0f, 0.0f,
+		0.0f, 0.0f,
+	};
+
+	glGenVertexArrays(1, &vao);
+	glGenBuffers(1, &vbo);
+	glBindVertexArray(vao);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), &vertices, GL_STATIC_DRAW);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), 0);
+	glBindVertexArray(0);
 }
 
 

@@ -16,6 +16,16 @@ void GameObject::OnCollide(GameObject* object)
 
 }
 
+void GameObject::OnMouseEnter(Mouse* mouse)
+{
+
+}
+
+void GameObject::OnMouseLeave(Mouse* mouse)
+{
+
+}
+
 GameObject::GameObject()
 {
 	Engine::gameManager->AddObject(this);
@@ -30,6 +40,21 @@ bool CheckCollision(GameObject& one, GameObject& two)
 	{
 		bool xAxisCol = ((one.collision.colXY1.x - one.collision.origin.x) + one.collision.colXY2.x >= (two.collision.colXY1.x - two.collision.origin.x)) && ((two.collision.colXY1.x - two.collision.origin.x) + two.collision.colXY2.x >= (one.collision.colXY1.x - one.collision.origin.x));
 		bool yAxisCol = ((one.collision.colXY1.y - one.collision.origin.y) + one.collision.colXY2.y >= (two.collision.colXY1.y - two.collision.origin.y)) && ((two.collision.colXY1.y - two.collision.origin.y) + two.collision.colXY2.y >= (one.collision.colXY1.y - one.collision.origin.y));
+
+		return (xAxisCol && yAxisCol);
+	}
+	else
+		return 0;
+}
+
+bool CheckMouseEnter(GameObject& one, Mouse* mouse)
+{
+	bool obj1_exist = (&one != nullptr);
+
+	if (obj1_exist)
+	{
+		bool xAxisCol = ( (one.collision.colXY1.x - one.collision.origin.x) + one.collision.colXY2.x >= (mouse->worldPosition.x) ) && ( mouse->worldPosition.x >= (one.collision.colXY1.x - one.collision.origin.x) );
+		bool yAxisCol = ((one.collision.colXY1.y - one.collision.origin.y) + one.collision.colXY2.y >= (mouse->worldPosition.y)) && (mouse->worldPosition.y >= (one.collision.colXY1.y - one.collision.origin.y));
 
 		return (xAxisCol && yAxisCol);
 	}
@@ -81,16 +106,28 @@ void GameObjectManager::Update()
 		{
 			if (CheckCollision(*objects[i], *objects[j]))
 			{
-				GameObject obj = *objects[i];
-				GameObject obj2 = *objects[j];
-
-
 				if (objects[i] != objects[j])
 				{
 					if (objects[i] != nullptr)
+					{
 						objects[i]->OnCollide(objects[j]);
+					}
 				}
-				
+			}
+
+			if (CheckMouseEnter(*objects[i], mouse))
+			{
+				if (objects[i] != nullptr)
+				{
+					objects[i]->OnMouseEnter(mouse);
+				}
+			}
+			else
+			{
+				if (objects[i] != nullptr)
+				{
+					objects[i]->OnMouseLeave(mouse);
+				}
 			}
 		}
 	}
